@@ -1,0 +1,5 @@
+mtbcrm/__pycache__
+venv
+node_modules
+config.py
+*.txt
