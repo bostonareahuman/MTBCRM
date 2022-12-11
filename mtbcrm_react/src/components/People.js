@@ -1,4 +1,3 @@
-import { useRevalidator } from "react-router-dom";
 import { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -11,12 +10,24 @@ function People(props){
 	console.log(props.userDet.FirstName)
 	const users = props.userDet
 	console.log('Users vairable')
-	console.log(users.FirstName)
+	console.log(users.FirstName) //returns true
+	console.log(props.userDet.hasOwnProperty('FirstName'))
 	const [fName,setfNames] = useState(users.FirstName || 'n')
 	const [lName,setlNames] = useState(users.LastName || 'n')
 	console.log('fName')
 	console.log(fName)
 	console.log(props.userDet.FirstName)
+
+	const handleChange = e => {
+		console.log('handle change running')
+		if(e.target.name === 'fName'){
+			setfNames(e.target.value)
+		}
+		else{
+			setlNames(e.target.value)
+		}
+		
+	  }
 
 	function formatPhoneNumber(phoneNumberString) {
 		var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -27,16 +38,7 @@ function People(props){
 		return null;
 	}
 
-	const handleChange = e => {
-		if(e.target.name == 'fName'){
-			setfNames(e.target.value)
-		}
-		else{
-			setlNames(e.target.value)
-		}
-		console.log('onchange people')
-		
-	  }
+	
 
 	var phoness = props.userDet.phones;
 	//console.log('phoness');

@@ -20,10 +20,10 @@ function Household(props){
 	}
 	*/
 
-	console.log('hsstate current')
-	console.log(hsstate)
+	//console.log('hsstate current')
+	//console.log(hsstate)
 	const handleChange = e => {
-		console.log('onchange forl')
+		//console.log('onchange forl')
 		hsstatesetState({
 		...hsstate,
 		[e.target.name]: e.target.value,
@@ -39,10 +39,10 @@ function Household(props){
 		return null;
 	}
 
-	console.log('Household')
+	/*console.log('Household')
 	console.log(hsstate);
 	console.log('End Household state')
-
+*/
 	return (<div id="householddeets"
 	><div className="header">Household<span style={{marginLeft:'5px',fontSize:'.9em'}}><FontAwesomeIcon icon={faPencilAlt}/></span></div>
 	<div className="holder">ID:<input name="household_id" type="text" readOnly value={hsstate.household_id || ''} /></div>
