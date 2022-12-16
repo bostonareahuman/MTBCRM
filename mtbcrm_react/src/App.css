@@ -60,7 +60,7 @@ html,body,#root { height:100%; }
 .mainbox{
 	background-color: green;
 	display:grid;
-	grid-template-columns: 200px 1fr;
+	grid-template-columns: minmax(200px,200px) minmax(900px,1fr);
 }
 
 UserList{
@@ -81,7 +81,7 @@ UserList{
 
 #peoplebox{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
 }
 #peoplebox > DIV{
@@ -123,6 +123,7 @@ input{
 	border-width: 0 0 2px;
 	border-bottom:1px solid black;
 	margin-left:10px;
+	width:70%;
 }
 
 .formlabel{
@@ -138,4 +139,11 @@ input{
 	display:grid;
 	grid-template-columns: 90px 1fr;
 	padding:4px;
+}
+
+#peopleerror{
+	font-size: .9em;
+	color:red;
+	margin-bottom:5px;
+	display: none;
 }

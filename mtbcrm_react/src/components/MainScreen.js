@@ -25,8 +25,9 @@ function MainScreen(props) {
   //console.log(props.token)
 
 	//alert(props.token);
-    function getuserList(){
+    function doUserSearch(){
 		alert('getuserlist');
+		
 		axios({
       method: "GET",
       url:"/userlist",
@@ -53,6 +54,7 @@ function MainScreen(props) {
 	}
 
 	function showDetails(event){
+		console.log('show details');
 		axios({
 			method: "POST",
 			url:"/userdets",
@@ -66,16 +68,7 @@ function MainScreen(props) {
 		  .then((response) => {
 			const res =response.data
 			setuserDet(response.data)
-			console.log('respsone data')
-			console.log(response.data)
-			console.log( 'MainScreen Household')
-			console.log(response.data.households)
-			console.log(response.data.FirstName)
-
-			console.log( 'MainScreen Household State')
-			this.setcurrHousehold(response.data.households)
-			console.log(currHousehold)
-			console.log( 'END MainScreen Household State')
+			setcurrHousehold(response.data.households)
 
 		  }).catch((error) => {
 			if (error.response) {
@@ -87,8 +80,10 @@ function MainScreen(props) {
 	}
 
   return (
+	
     <div className="mainbox">
-		<UserList getUserList={getuserList} showDetails={showDetails} users={userList}></UserList>
+		
+		<UserList getUserList={doUserSearch} showDetails={showDetails} users={userList}></UserList>
 		<div id="peoplejobbox">
 			<div id="peoplebox">
 				<People userDet={userDet}></People>

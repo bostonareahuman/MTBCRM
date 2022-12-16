@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import { useState } from 'react'
 
 
@@ -23,7 +25,7 @@ function UserList(props){
 	)
 	return (
 	<div id="mainlist">
-		<input id="searchuser" type="text" onChange={handleChange} value={searchTerm}></input><button id="useradd" onClick={props.getUserList}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+		<input id="searchuser" style={{width:"60%"}} type="text" onChange={handleChange} value={searchTerm}></input><button id="usersearch" onClick={props.getUserList}><FontAwesomeIcon icon={faMagnifyingGlass} /></button><button id="useradd" onClick={props.addUser}><FontAwesomeIcon icon={faPlus} /></button>
 		<div id="Userlist">
 			{luser}
 		</div>

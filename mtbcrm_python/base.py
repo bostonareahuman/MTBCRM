@@ -77,7 +77,7 @@ def userdets():
 	tuple2 = (request.json.get("id", None),2,2)
 	f.write(str(tuple2))
 	
-	cursor.execute('''SELECT p.person_id,FirstName,LastName from persons p 
+	cursor.execute('''SELECT p.person_id,FirstName,LastName,email from persons p 
 	  where p.person_id=%s''',(request.json.get("id", None),))
 
 	results = cursor.fetchall()
@@ -109,9 +109,20 @@ def userdets():
 @api.route('/userlist', methods=["GET"])
 def userlist():	
 	cursor = mysql.connection.cursor()
-	cursor.execute('''SELECT * from persons''')
+	cursor.execute('''SELECT * from persons order by LastName,FirstName asc''')
 	results = cursor.fetchall()
 	return jsonify(results)
+
+@api.route('/updateperson', methods=["POST"])
+def updateperson():	
+	try:
+		cursor = mysql.connection.cursor()
+		sql = '''UPDATE persons set FirstName=%s,LastName=%s,email=%s where person_id=%s'''
+		cursor.execute(sql,(request.json.get("fName", None),request.json.get("lName", None),request.json.get("email", None),request.json.get("id", None)))
+		mysql.connection.commit()
+		return jsonify({"success":str(request.json.get("id", None))+str(request.json.get("lName", None))+str(request.json.get("fName", None))+str(request.json.get("email", None))})
+	except Exception as e:
+		return jsonify({"failure":"failure"})
 
 if __name__ == '__main__':
    api.run('127.0.0.1',5000,debug = True)
