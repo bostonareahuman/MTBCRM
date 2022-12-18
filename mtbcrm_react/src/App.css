@@ -147,3 +147,17 @@ input{
 	margin-bottom:5px;
 	display: none;
 }
+
+#newphonebox{
+	padding:10px;
+
+}
+
+#phoneerror{
+	background-color: red;
+	color:white;
+	padding:3px;
+	box-sizing: border-box;
+	font-size: .8em;
+	margin-top: 2px;
+}

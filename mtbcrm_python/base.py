@@ -124,5 +124,47 @@ def updateperson():
 	except Exception as e:
 		return jsonify({"failure":"failure"})
 
+@api.route('/newphone', methods=["POST"])
+def newphone():	
+	try:
+		#return jsonify({"running":"running"})
+		cursor = mysql.connection.cursor()
+		sql = '''INSERT into phones (person_id,phone_type,phone_number) values (%s,%s,%s)'''
+		cursor.execute(sql,(request.json.get("id", None),request.json.get("phonetype", None),request.json.get("phonenumber", None)))
+		mysql.connection.commit()
+		return jsonify({"status":"success","message":str(request.json.get("id", None))+str(request.json.get("phonetype", None))+str(request.json.get("phonenumber", None))})
+	except Exception as e:
+		return jsonify({"status":"failure","message":str(e)})
+
+@api.route('/removephone', methods=["POST"])
+def removephone():	
+	try:
+		f = open('removephone.txt','w')
+		f.write('begin')
+		try:
+			f.write('value')
+			f.write(str(request.json.get("id", 'nothing')))
+			
+		except Exception as e:
+			f.write(str(e))
+		#return jsonify({"running":"running"})
+		cursor = mysql.connection.cursor()
+		idval = request.json.get("id").split('_')[1]
+		f.write(str(idval))
+		if not idval.isnumeric():
+			return jsonify({"status":"failure","message":'Phone Id Not Numeric'})
+		sql = '''DELETE from phones where phone_id=%s'''
+		cursor.execute(sql,(idval,))
+		mysql.connection.commit()
+		sql2 = '''SELECT * from phones where phone_id=%s'''
+		cursor.execute(sql,(idval,))
+		resultshh = cursor.fetchall()
+		f.write('\n\nLength:'+str(resultshh))
+		if len(resultshh) != 0:
+			return jsonify({"status":"failure","message":str(idval)+':Phone Remains'})
+		return jsonify({"status":"success","message":str(idval)})
+	except Exception as e:
+		return jsonify({"status":"failure","message":str(e)})
+
 if __name__ == '__main__':
    api.run('127.0.0.1',5000,debug = True)

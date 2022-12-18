@@ -24,6 +24,8 @@ function MainScreen(props) {
   //console.log('mainscreen')
   //console.log(props.token)
 
+
+
 	//alert(props.token);
     function doUserSearch(){
 		alert('getuserlist');
@@ -79,6 +81,8 @@ function MainScreen(props) {
 		  })
 	}
 
+
+
   return (
 	
     <div className="mainbox">
@@ -86,7 +90,7 @@ function MainScreen(props) {
 		<UserList getUserList={doUserSearch} showDetails={showDetails} users={userList}></UserList>
 		<div id="peoplejobbox">
 			<div id="peoplebox">
-				<People userDet={userDet}></People>
+				<People userDet={userDet} ></People>
 				<Household whichhousehold={currHousehold}></Household>
 				<Autos whichautos={currAutos}></Autos>
 			</div>	
